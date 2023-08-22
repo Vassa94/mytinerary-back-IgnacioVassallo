@@ -23,3 +23,4 @@ auxData
 *.njsproj
 *.sln
 *.sw?
+.env

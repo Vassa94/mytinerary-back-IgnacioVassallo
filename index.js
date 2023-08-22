@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import config from "./config.js";
 import citiesRoutes from "./router/citiesRoutes.js";
+import cors from "cors";
 
 const app = express();
 
@@ -9,12 +10,16 @@ mongoose.connect(config.mongoURI, { useNewUrlParser: true, useUnifiedTopology: t
     .then(() => console.log("Connected to MongoDB"))
     .catch(err => console.error("Error connecting to MongoDB:", err));
 
+
 app.use(express.json());
 
-app.use("/cities", citiesRoutes);
-// Agregar más rutas aquí si es necesario
+
+
+app.use(cors());
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
-}); 
+});
+
+app.use("/cities", citiesRoutes);

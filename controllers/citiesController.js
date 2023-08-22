@@ -8,7 +8,7 @@ const citiesController = {
       await newCity.save();
       res.status(201).json(newCity);
     } catch (error) {
-      res.status(500).json({ error, message: "Error creating city" });
+      res.status(500).json({ error: "Error creating city" });
     }
   },
 
@@ -19,7 +19,7 @@ const citiesController = {
       const createdCities = await City.insertMany(citiesData);
       res.status(201).json(createdCities);
     } catch (error) {
-      res.status(500).json({ error, message: "Error creating cities" });
+      res.status(500).json({ error: "Error creating cities" });
     }
   },
 
@@ -27,11 +27,12 @@ const citiesController = {
     try {
       const city = await City.findById(req.params.id);
       if (!city) {
-        return res.status(404).json({ error, message: "City not found" });
+        return res.status(404).json({ error: "City not found" });
       }
       res.json(city);
     } catch (error) {
-      res.status(500).json({ error, message: "Error fetching city" });
+      console.log(error);
+      res.status(500).json({ error: "Error fetching city" });
     }
   },
 
@@ -40,7 +41,7 @@ const citiesController = {
       const cities = await City.find();
       res.json(cities);
     } catch (error) {
-      res.status(500).json({ error, message: "Error fetching cities" });
+      res.status(500).json({ error: "Error fetching cities" });
     }
   },
 
@@ -48,7 +49,7 @@ const citiesController = {
     try {
       const city = await City.findById(req.params.id);
       if (!city) {
-        return res.status(404).json({ error, message: "City not found" });
+        return res.status(404).json({ error: "City not found" });
       }
 
       city.name = req.body.name || city.name;
@@ -56,7 +57,7 @@ const citiesController = {
       await city.save();
       res.json(city);
     } catch (error) {
-      res.status(500).json({ error, message: "Error updating city" });
+      res.status(500).json({ error: "Error updating city" });
     }
   },
 
@@ -64,12 +65,12 @@ const citiesController = {
     try {
       const city = await City.findById(req.params.id);
       if (!city) {
-        return res.status(404).json({ error, message: "City not found" });
+        return res.status(404).json({ error: "City not found" });
       }
       await city.remove();
       res.json({ message: "City deleted" });
     } catch (error) {
-      res.status(500).json({ error, message: "Error deleting city" });
+      res.status(500).json({ error: "Error deleting city" });
     }
   },
 };
