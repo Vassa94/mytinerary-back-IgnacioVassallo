@@ -8,7 +8,8 @@ const citySchema = new mongoose.Schema({
     city: { type: String, required: true },
     description: { type: String, required: true },
     smalldescription: { type: String, required: true },
-    featuredLocation: { type: String, required: true }
+    featuredLocation: { type: String, required: true },
+    itineraries: { type: Array},
 });
 
 export default mongoose.model("City", citySchema);

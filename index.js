@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import config from "./config.js";
 import citiesRoutes from "./router/citiesRoutes.js";
+import itineraryRoutes from "./router/itineraryRoutes.js";
 import cors from "cors";
 
 const app = express();
@@ -23,3 +24,4 @@ app.listen(PORT, () => {
 });
 
 app.use("/cities", citiesRoutes);
+app.use("/itinerary", itineraryRoutes);
