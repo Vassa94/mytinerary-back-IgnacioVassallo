@@ -11,7 +11,7 @@ const authController = {
         try {
             const { email, password, photo, nombre, apellido,  pais } = req.body;
             const existingUser = await User.findOne({ email });
-            if (existingUser) {
+            if (existingUser) {            
                 return res.status(400).json({ message: 'User already exists' });
             }
             const hashedPassword = await bcrypt.hash(password, 10); 
@@ -24,7 +24,7 @@ const authController = {
                 pais,
             });
             await newUser.save();
-            return res.status(201).json({ message: 'User registered successfully' });
+            return res.status(201).json({ email,password });
         } catch (error) {
             return next(error);
         }
